@@ -32,6 +32,7 @@ def _postgres_sql(sql):
     )
     sql = re.sub(r"\bINTEGER\s+PRIMARY\s+KEY\s+AUTOINCREMENT\b", "SERIAL PRIMARY KEY", sql, flags=re.IGNORECASE)
     sql = re.sub(r"\s+COLLATE\s+NOCASE\b", "", sql, flags=re.IGNORECASE)
+    sql = sql.replace("%", "%%")
     sql = re.sub(r"\?", "%s", sql)
     sql = re.sub(
         r"^\s*INSERT\s+OR\s+IGNORE\s+INTO\b",
